@@ -17,7 +17,9 @@ export default function Home() {
           {user ? (
             <div>
               <button onClick={logout}>logout</button>
-              <h1 className="text-2xl font-bold">{user.name}'s Todo List!</h1>
+              <h1 className="text-2xl font-bold">
+                {user.name}&apos;s Todo List!
+              </h1>
             </div>
           ) : (
             <button onClick={() => login({ name: "Patrick Gilligan" })}>

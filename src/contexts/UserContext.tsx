@@ -1,4 +1,9 @@
-import React, { useContext, createContext, useState, ReactNode } from "react";
+import React, {
+  useContext,
+  createContext,
+  useState,
+  type ReactNode,
+} from "react";
 import { z } from "zod";
 
 const UserDataSchema = z.object({
@@ -19,8 +24,12 @@ interface UserContextType {
 
 const defaultUserContext = {
   user: null,
-  login: () => {},
-  logout: () => {},
+  login: () => {
+    throw new Error("not yet initialized");
+  },
+  logout: () => {
+    throw new Error("not yet initialized");
+  },
 };
 
 const UserContext = createContext<UserContextType>(defaultUserContext);
