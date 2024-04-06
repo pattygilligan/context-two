@@ -1,9 +1,10 @@
 import Head from "next/head";
 import Link from "next/link";
+import TodoList from "~/components/TodoList";
 import { useUser } from "~/contexts/UserContext";
 
 export default function Home() {
-  const { user, login, logout } = useUser();
+  const { user, login } = useUser();
 
   return (
     <>
@@ -15,12 +16,7 @@ export default function Home() {
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-slate-50 to-slate-100">
         <div className="min-h-96 min-w-96 rounded border bg-white p-4">
           {user ? (
-            <div>
-              <button onClick={logout}>logout</button>
-              <h1 className="text-2xl font-bold">
-                {user.name}&apos;s Todo List!
-              </h1>
-            </div>
+            <TodoList />
           ) : (
             <button onClick={() => login({ name: "Patrick Gilligan" })}>
               login
