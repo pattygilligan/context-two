@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import { useUser } from "~/contexts/UserContext";
 import type { Todo } from "~/lib/types";
 import { useData } from "~/hooks/useData";
-import { z } from "zod";
 import { useUpsert } from "~/hooks/useUpsertTodo";
-import { todo } from "node:test";
 import { useDeleteTodo } from "~/hooks/useDeleteTodo";
 
 export default function TodoList() {
@@ -16,7 +14,7 @@ export default function TodoList() {
 
   const onUpsertSuccess = (newTodo: Todo) => {
     if (!todoList?.find((item) => item.id === newTodo.id)) {
-      setTodoList([...(todoList || []), newTodo]);
+      setTodoList([...(todoList ?? []), newTodo]);
     } else {
       setTodoList(
         todoList?.map((item) => (item.id === newTodo.id ? newTodo : item)) ??
@@ -47,7 +45,7 @@ export default function TodoList() {
     //1 is temporary ID
     const id = getRandomInt(1, 10000000);
     const newTodo = { text: inputText, done: false, id: id };
-    upsert(newTodo);
+    void upsert(newTodo);
     setInputText("");
   };
 
