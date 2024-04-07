@@ -19,7 +19,7 @@ export default function TodoList() {
       setTodoList([...(todoList || []), newTodo]);
     } else {
       setTodoList(
-        todoList?.map((item) => (item.id === newTodo.id ? newTodo : item)) ||
+        todoList?.map((item) => (item.id === newTodo.id ? newTodo : item)) ??
           [],
       );
     }
@@ -28,7 +28,7 @@ export default function TodoList() {
   const { upsert, isLoading } = useUpsert(onUpsertSuccess);
 
   const onDeleteSuccess = (oldTodo: Todo) => {
-    setTodoList(todoList?.filter((item) => item.id !== oldTodo.id) || []);
+    setTodoList(todoList?.filter((item) => item.id !== oldTodo.id) ?? []);
   };
 
   const { deleteTodo } = useDeleteTodo(onDeleteSuccess);

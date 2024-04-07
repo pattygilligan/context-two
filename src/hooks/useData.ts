@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import { Todo, TodoSchema } from "~/lib/types";
+import { type Todo, TodoSchema } from "~/lib/types";
+
+interface FetchResponse {
+  todoList: Todo[];
+}
 
 export function useData() {
   const [fetchedTodoList, setFetchedTodoList] = useState<Todo[] | null>(null);
@@ -12,7 +16,7 @@ export function useData() {
       fetch("api/todo", {
         method: "GET",
       })
-        .then((response) => response.json())
+        .then((response) => response.json() as Promise<FetchResponse>)
         .then((data) => {
           setFetchedTodoList(TodoSchema.array().parse(data.todoList));
         })
